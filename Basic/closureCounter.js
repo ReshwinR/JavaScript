@@ -1,0 +1,23 @@
+//closures
+// Input: 
+// n = 10 
+// ["call","call","call"]
+// Output: [10,11,12]
+// Explanation: 
+// counter() = 10 // The first time counter() is called, it returns n.
+// counter() = 11 // Returns 1 more than the previous time.
+// counter() = 12 // Returns 1 more than the previous time.
+
+var createCounter = function(n) {
+    let counter = n
+    return function() {
+        console.log(counter++)
+        return counter
+    };
+};
+
+
+const counter = createCounter(10)
+counter() // 10
+counter() // 11
+counter() // 12
