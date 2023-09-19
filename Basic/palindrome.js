@@ -1,6 +1,6 @@
 const checkPal = (str) => {
-  if (str === str.split("").reverse().join("")) return "Pal"
-    else return "Not Pal";
+  if (str === str.split("").reverse().join("")) return "Pal";
+  else return "Not Pal";
 };
 
 const result = checkPal("LeveL");

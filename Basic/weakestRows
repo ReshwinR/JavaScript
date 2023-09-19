@@ -1,0 +1,67 @@
+// Input: mat =
+// [[1,1,0,0,0],
+//  [1,1,1,1,0],
+//  [1,0,0,0,0],
+//  [1,1,0,0,0],
+//  [1,1,1,1,1]],
+// k = 3
+// Output: [2,0,3]
+// Explanation:
+// The number of soldiers in each row is:
+// - Row 0: 2
+// - Row 1: 4
+// - Row 2: 1
+// - Row 3: 2
+// - Row 4: 5
+// The rows ordered from weakest to strongest are [2,0,3,1,4].
+
+const getAllIndexes = (arr, val) => {
+  let indexes = [];
+  arr.forEach((ele, index) => {
+    if (ele === val) indexes.push(index);
+  });
+  return indexes;
+};
+const customSort = (a, b) => a - b;
+
+var kWeakestRows = function (mat, k) {
+  const solidersArray = [];
+  const main = [];
+  for (let i of mat) {
+    const freq = i.reduce((acc, cur) => (cur === 1 ? acc + 1 : acc), 0);
+    solidersArray.push(freq);
+  }
+  const copy = [...solidersArray];
+  copy.sort();
+  let setSol = new Set(copy);
+  const finalArr = [...setSol];
+  finalArr.sort(customSort);
+  for (let j of finalArr) {
+    const re = getAllIndexes(solidersArray, j);
+    main.push(...re);
+  }
+
+  return main.slice(0, k);
+};
+
+const mat = [
+  [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+  [1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+  [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+];
+const rangeUpto = 1;
+console.log(kWeakestRows(mat, rangeUpto));
